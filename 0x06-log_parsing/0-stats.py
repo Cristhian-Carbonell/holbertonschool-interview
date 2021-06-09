@@ -1,33 +1,48 @@
 #!/usr/bin/python3
-"""script that reads stdin line by line and computes metrics:"""
+"""
+Task - Script that reads stdin line by line and computes metrics
+"""
+
 import sys
 
-lines = sys.stdin
-count = 1
-size = []
-code = {"200": 0,
-        "301": 0,
-        "400": 0,
-        "401": 0,
-        "403": 0,
-        "404": 0,
-        "405": 0,
-        "500": 0}
 
-for line in lines:
-    if count == 10:
-        total_size = sum(size)
-        print("File size: {}".format(total_size))
-        size.clear()
-        size.append(total_size)
-        for i in code:
-            if code[i] != 0:
-                print("{}: {}".format(i, code[i]))
-        count = 0
+if __name__ == "__main__":
+    st_code = {"200": 0,
+               "301": 0,
+               "400": 0,
+               "401": 0,
+               "403": 0,
+               "404": 0,
+               "405": 0,
+               "500": 0}
+    count = 1
+    file_size = 0
 
-    str_line = line[-8:]
-    size.append(int(str_line[4:]))
-    str_code = str_line[:3]
-    if str_code in code:
-        code[str_code] += 1
-    count += 1
+    def parse_line(line):
+        """ Read, parse and grab data"""
+        try:
+            parsed_line = line.split()
+            status_code = parsed_line[-2]
+            if status_code in st_code.keys():
+                st_code[status_code] += 1
+            return int(parsed_line[-1])
+        except Exception:
+            return 0
+
+    def print_stats():
+        """print stats in ascending order"""
+        print("File size: {}".format(file_size))
+        for key in sorted(st_code.keys()):
+            if st_code[key]:
+                print("{}: {}".format(key, st_code[key]))
+
+    try:
+        for line in sys.stdin:
+            file_size += parse_line(line)
+            if count % 10 == 0:
+                print_stats()
+            count += 1
+    except KeyboardInterrupt:
+        print_stats()
+        raise
+    print_stats()
