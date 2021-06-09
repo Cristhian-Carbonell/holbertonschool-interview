@@ -26,9 +26,7 @@ for line in lines:
         count = 0
 
     str_line = line[-8:]
-    print(str_line)
     size.append(int(str_line[4:]))
-    print(size)
     str_code = str_line[:3]
     if str_code in code:
         code[str_code] += 1
