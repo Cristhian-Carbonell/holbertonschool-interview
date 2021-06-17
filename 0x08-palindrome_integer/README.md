@@ -15,7 +15,7 @@
 -All your header files should be include guarded
 
 ## Tasks :pushpin:
-### 0. Palindrome unsigned integer
+### [0. Palindrome unsigned integer](https://github.com/Cristhian-Carbonell/holbertonschool-interview/blob/main/0x08-palindrome_integer/0-is_palindrome.c)
 Write a function that checks whether or not a given unsigned integer is a palindrome.
 
 - Prototype: ```int is_palindrome(unsigned long n);```
