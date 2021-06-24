@@ -17,7 +17,7 @@
 All your files must be executable
 
 ## Tasks :white_check_mark:
-### 0. UTF-8 Validation
+### [0. UTF-8 Validation](https://github.com/Cristhian-Carbonell/holbertonschool-interview/blob/main/0x09-utf8_validation/0-validate_utf8.py)
 Write a method that determines if a given data set represents a valid UTF-8 encoding.
 
 - Prototype: ```def validUTF8(data)```
@@ -54,3 +54,12 @@ True
 False
 carrie@ubuntu:~/0x09-utf8_validation$
 ```
+
+----
+## Author :test_tube:
+
+* **Cristhian Carbonell**
+* [GitHub](https://github.com/Cristhian-Carbonell)
+* [Twitter](https://twitter.com/CristhianCarbo9)
+* [LinkedIn](https://www.linkedin.com/in/cristhian-alexander-carbonell/)
+
