@@ -59,7 +59,7 @@ carrie@ubuntu:~/0x09-utf8_validation$
 ## Author :test_tube:
 
 * **Cristhian Carbonell**
-* [GitHub](https://github.com/Cristhian-Carbonell)
-* [Twitter](https://twitter.com/CristhianCarbo9)
-* [LinkedIn](https://www.linkedin.com/in/cristhian-alexander-carbonell/)
+* [GitHub](https://github.com/Cristhian-Carbonell) :octocat:
+* [Twitter](https://twitter.com/CristhianCarbo9) :link:
+* [LinkedIn](https://www.linkedin.com/in/cristhian-alexander-carbonell/) :electron:
 
