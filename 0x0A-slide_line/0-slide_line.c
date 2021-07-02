@@ -172,7 +172,6 @@ int slide_right(int *line, size_t size)
 	searching = 0;
 	mark = size;
 	for (i = ((int) size - 1); i >= 0; i--)
-	{
 		if (line[i] == 0)
 		{
 			if (searching == 0)
@@ -201,9 +200,10 @@ int slide_right(int *line, size_t size)
 				next_idx =  get_idx_of_next_non_zero(line, i - 1, size, 2);
 				merge(&mark, &i, line, &next_idx, 2, size);
 			}
-	}
 	if (mark != (int) size)
+	{
 		line[mark] = line[i + 1];
 		line[i + 1] = 0;
+	}
 	return (1);
 }
