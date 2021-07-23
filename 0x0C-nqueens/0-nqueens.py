@@ -4,6 +4,7 @@
 
 import sys
 
+
 def validate(args):
     """[summary]
 
@@ -22,12 +23,13 @@ def validate(args):
             number = int(args[1])
             if number < 4:
                 print("N must be at least 4")
-                exit(1)    
+                exit(1)
         except Exception:
             print("N must be a number")
             exit(1)
 
         return number
+
 
 def solveNQ(number):
     """[summary]
@@ -49,7 +51,8 @@ def solveNQ(number):
         return False
 
     return True
-    
+
+
 def solveNQUtil(board, col, number):
     """[summary]
 
@@ -65,7 +68,7 @@ def solveNQUtil(board, col, number):
         print_board(board)
         return True
     answer = False
-    
+
     for i in range(number):
         if (isSafe(board, i, col, number)):
             board[i][col] = 1
@@ -73,6 +76,7 @@ def solveNQUtil(board, col, number):
             board[i][col] = 0
 
     return answer
+
 
 def isSafe(board, row, col, number):
     """[summary]
@@ -100,6 +104,7 @@ def isSafe(board, row, col, number):
 
     return True
 
+
 def print_board(board):
     """[summary]
 
@@ -120,4 +125,3 @@ def print_board(board):
 if __name__ == "__main__":
     number = validate(sys.argv)
     solveNQ(number)
-
