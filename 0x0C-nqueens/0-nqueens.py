@@ -14,10 +14,7 @@ def validate(args):
     Returns:
         [type]: [description]
     """
-    if len(args) > 2:
-        print("Usage: nqueens N")
-        exit(1)
-    else:
+    if len(args) == 2:
 
         try:
             number = int(args[1])
@@ -29,6 +26,9 @@ def validate(args):
             exit(1)
 
         return number
+    else:
+        print("Usage: nqueens N")
+        exit(1)
 
 
 def solveNQ(number):
