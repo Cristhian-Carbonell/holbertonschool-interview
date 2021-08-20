@@ -7,6 +7,8 @@ def rain(walls):
     """calculate how many square units of water will be
     retained after it rains
     """
+    if walls is None:
+        return 0
     left_wall = 0
     right_wall = 0
     result = 0
@@ -19,10 +21,6 @@ def rain(walls):
                 right_wall = walls[i + 1]
             if left_wall < right_wall:
                 result += left_wall
-                left_wall = 0
-                right_wall = 0
-            else:
-                result += right_wall
                 left_wall = 0
                 right_wall = 0
             i += 1
