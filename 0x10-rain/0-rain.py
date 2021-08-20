@@ -21,6 +21,10 @@ def rain(walls):
                 result += left_wall
                 left_wall = 0
                 right_wall = 0
+            else:
+                result += right_wall
+                left_wall = 0
+                right_wall = 0
             i += 1
         return result
     else:
