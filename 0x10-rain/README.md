@@ -47,7 +47,7 @@ jesse@ubuntu:~/0x10$
 ```
 
 Visual representation of the walls [0, 1, 0, 2, 0, 3, 0, 4]
-
+![](https://github.com/Cristhian-Carbonell/holbertonschool-interview/blob/main/0x10-rain/image/85ef782020ac6efdc7004b62ea86724a552285b4.png)
 
 
 Visual representation of the walls [2, 0, 0, 4, 0, 0, 1, 0]
