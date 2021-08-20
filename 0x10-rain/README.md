@@ -51,5 +51,5 @@ Visual representation of the walls [0, 1, 0, 2, 0, 3, 0, 4]
 
 
 Visual representation of the walls [2, 0, 0, 4, 0, 0, 1, 0]
-
+![](https://github.com/Cristhian-Carbonell/holbertonschool-interview/blob/main/0x10-rain/image/2.png)
 
