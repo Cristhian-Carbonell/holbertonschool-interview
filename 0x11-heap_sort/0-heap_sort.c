@@ -53,6 +53,9 @@ void heap_sort(int *array, size_t size)
 {
 	int i;
 
+	if (array == NULL)
+		return;
+
 	for (i = size / 2 - 1; i >= 0; i--)
 		sift_down(array, size, i);
 	for (i = size - 1; i > 0; i--)
