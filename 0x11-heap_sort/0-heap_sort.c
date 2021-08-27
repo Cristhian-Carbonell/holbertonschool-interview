@@ -4,6 +4,8 @@
  * swap - swap two variables using a user defined
  * @xp: values pointed by xp
  * @yp:values pointed by yp
+ * @array: array of values
+ * @size: size
  */
 void swap(int *xp, int *yp, int *array, size_t size)
 {
