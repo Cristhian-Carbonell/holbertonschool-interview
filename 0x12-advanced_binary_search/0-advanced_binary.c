@@ -64,6 +64,6 @@ void print_array(int *array, int mid, int size)
 		printf("%d, ", array[mid]);
 		mid++;
 	}
-	printf("%d, ", array[mid]);
+	printf("%d", array[mid]);
 	printf("\n");
 }
