@@ -4,7 +4,8 @@
 import requests
 
 
-def count_words(subreddit, word_list, keyWord_cont={}, next_pag=None, reap_keyWord={}):
+def count_words(subreddit, word_list, keyWord_cont={},
+                next_pag=None, reap_keyWord={}):
     """recursive function that queries the Reddit API,
     parses the title of all hot articles,
     and prints a sorted count of given keywords
@@ -12,11 +13,12 @@ def count_words(subreddit, word_list, keyWord_cont={}, next_pag=None, reap_keyWo
     headers = auth()
 
     if next_pag:
-        res = requests.get('https://reddit.com/r/' + subreddit +
-                            '/hot.json?after=' + next_pag, headers=headers)
+        res = requests.get('https://reddit.com/r/' +
+                           subreddit + '/hot.json?after=' +
+                           next_pag, headers=headers)
     else:
-        res = requests.get('https://reddit.com/r/' + subreddit +
-                            '/hot.json', headers=headers)
+        res = requests.get('https://reddit.com/r/' +
+                           subreddit + '/hot.json', headers=headers)
 
     if res.status_code == 404:
         return
@@ -54,8 +56,6 @@ def count_words(subreddit, word_list, keyWord_cont={}, next_pag=None, reap_keyWo
             if res[1] > 0:
                 print('{}: {}'.format(res[0], res[1]))
 
-    
-
 
 def auth():
     """Request a temporary OAuth token from Reddit
@@ -76,4 +76,3 @@ def auth():
     headers = {**headers, **{'Authorization': f"bearer {TOKEN}"}}
 
     return headers
-    
