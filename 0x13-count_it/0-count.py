@@ -1,10 +1,8 @@
 #!/usr/bin/python3
-"""
-0x13. Count it! - Write a recursive function that queries the Reddit API,
-                  parses the title of all hot articles, and prints a sorted
-                  count of given keywords (case-insensitive, delimited by
-                  spaces.
-                  Javascript should count as javascript, but java should not).
+"""recursive function that queries the Reddit API,
+parses the title of all hot articles, and prints a sorted count
+of given keywords (case-insensitive, delimited by spaces. Javascript
+should count as javascript, but java should not).
 """
 import requests
 
@@ -15,7 +13,7 @@ def count_words(subreddit, word_list, keyWord_cont={},
     parses the title of all hot articles,
     and prints a sorted count of given keywords
     """
-    headers = auth()
+    headers = {'User-Agent': 'holberton/0.0.1'}
 
     if next_pag:
         res = requests.get('https://reddit.com/r/' +
@@ -60,25 +58,4 @@ def count_words(subreddit, word_list, keyWord_cont={},
         for res in sorted_res:
             if res[1] > 0:
                 print('{}: {}'.format(res[0], res[1]))
-
-
-def auth():
-    """Request a temporary OAuth token from Reddit
-    """
-    auth = requests.auth.HTTPBasicAuth('BqiqtJ5VmwjnxfbhmEiUSQ',
-                                       'yDmd9DYbCgYlzRi0jjnoiP0i_6dGqw')
-
-    data = {'grant_type': 'password',
-            'username': 'Tolkien-retr0',
-            'password': 'cla741236'}
-
-    headers = {'User-Agent': 'holberton/0.0.1'}
-
-    res = requests.post('https://www.reddit.com/api/v1/access_token',
-                        auth=auth, data=data, headers=headers)
-    TOKEN = res.json()['access_token']
-
-    headers = {**headers, **{'Authorization': f"bearer {TOKEN}"}}
-
-    return headers
 
