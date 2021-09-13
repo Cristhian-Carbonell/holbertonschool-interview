@@ -79,3 +79,4 @@ def auth():
     headers = {**headers, **{'Authorization': f"bearer {TOKEN}"}}
 
     return headers
+
