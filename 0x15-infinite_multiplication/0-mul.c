@@ -8,7 +8,9 @@
  */
 int check(char *number)
 {
-	for (int i = 0; number[i] != '\0'; i++)
+	int i;
+
+	for (i = 0; number[i] != '\0'; i++)
 	{
 		if (isdigit(number[i]))
 			return (0);
