@@ -88,11 +88,12 @@ void multipliesNumbers(char **argv)
  */
 int main(int argc, char **argv)
 {
+	int i;
 	char *error = "Error";
 
 	if (argc != 3 || check(argv[1]) || check(argv[2]))
 	{
-		for (int i = 0; error[i] != '\0'; i++)
+		for (i = 0; error[i] != '\0'; i++)
 			_putchar(error[i]);
 		_putchar('\n');
 		exit(98);
