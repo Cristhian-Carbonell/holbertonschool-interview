@@ -1,110 +1,114 @@
 #include "holberton.h"
 
 /**
- * check - checks if string is number
- * @number: string
- *
- * Return: 1 if number, 0 if not
+ * _puts - print each string number
+ * @s: string. number
+ * Return: void
  */
-int check(char *number)
+void _puts(char *s)
 {
-	int i;
-
-	for (i = 0; number[i] != '\0'; i++)
+	if (*s != '\0')
 	{
-		if (isdigit(number[i]))
-			return (0);
+		_putchar(*s);
+		puts(s + 1);
 	}
-
-	return (1);
 }
-
-
 /**
- * memory - reserves memory initialized to 0
- * @full_length: number of bytes
- *
- * Return: pointer
+ * _isdigit - check if s is a number or not.
+ * @s: string to check.
+ * Return: 0 if s
  */
-char *memory(unsigned int full_length)
+int _isdigit(char *s)
 {
-	unsigned int i;
-	char *pointer;
+	int i, digit = 0;
 
-	pointer = malloc(full_length + 1);
-	if (!pointer)
-		return (0);
-	for (i = 0; i < full_length; i++)
-		pointer[i] = '0';
-	pointer[i] = '\0';
-
-	return (pointer);
-}
-
-/**
- * multipliesNumbers - program that multiplies two positive numbers
- * @argv: array of character pointers
- *
- */
-void multipliesNumbers(char **argv)
-{
-	int i, j, len1, len2, lenfull;
-	int mul, add, ten, ten2, tl, zer = 0;
-	char *pointer;
-
-	len1 = strlen(argv[1]), len2 = strlen(argv[2]);
-	lenfull = len1 + len2;
-	pointer = memory(lenfull);
-	for (i = len2 - 1; i >= 0; i--)
+	for (i = 0; s[i] && !digit; i++)
 	{
-		ten = 0, ten2 = 0;
-		for (j = len1 - 1; j >= 0; j--)
-		{
-			tl = i + j + 1;
-			mul = (argv[1][j] - '0') * (argv[2][i] - '0') + ten;
-			ten = mul / 10;
-			add = (pointer[tl] - '0') + (mul % 10) + ten2;
-			ten2 = add / 10;
-			pointer[tl] = (add % 10) + '0';
-		}
-		pointer[tl - 1] = (ten + ten2) + '0';
+		if (s[i] < '0' || s[i] > '9')
+			digit++;
 	}
-	if (pointer[0] == '0')
-		zer = 1;
-	for (; zer < lenfull; zer++)
-		_putchar(pointer[zer]);
-	_putchar('\n');
-	free(pointer);
+	return (digit);
 }
 
-
-
 /**
- * main - entry point
- * @argc: contains the number of arguments that have been entered.
- * @argv: array of character pointers.
- *
- * Return: 0
+ * multiplication - multiplies
+ * @num1: first number.
+ * @num2: second number.
+ * @len1: length of num1.
+ * @len2: length of num2.
+ * Return: result of multiplies.
  */
-int main(int argc, char **argv)
+char *multiplication(char *num1, char *num2, int len1, int len2)
 {
-	int i;
-	char *error = "Error";
+	char *result = NULL;
+	int i, j, carry, len_total = (len1 + len2);
 
-	if (argc != 3 || check(argv[1]) || check(argv[2]))
+	result = malloc(sizeof(char) * len_total);
+	if (!result)
 	{
-		for (i = 0; error[i] != '\0'; i++)
-			_putchar(error[i]);
-		_putchar('\n');
+		_puts("Error");
 		exit(98);
 	}
-	if (atoi(argv[1]) == 0 || atoi(argv[2]) == 0)
+
+	for (i = 0; i < len_total; i++)
+		result[i] = '0';
+
+	for (i = len1 - 1; i >= 0; i--)
 	{
-		_putchar('0');
-		_putchar('\n');
+		carry = 0;
+		for (j = len2 - 1; j >= 0; j--)
+		{
+			carry += (num1[i] - '0') * (num2[j] - '0');
+			carry += result[i + j + 1] - '0';
+			result[i + j + 1] = (carry % 10) + '0';
+			carry /= 10;
+		}
+
+		if (carry)
+			result[i + j + 1] = (carry % 10) + '0';
+	}
+
+	return (result);
+}
+/**
+ * main - multiplies two numbers.
+ * description: mul num1 num2
+ * Print the result.
+ * @av: arguments value (num1, num2)
+ * @ac: arguments count
+ * Return: 0 if success otherwise 98 and print Error.
+ */
+int main(int ac, char **av)
+{
+	int len1 = 0, len2 = 0;
+	char *num1 = av[1], *num2 = av[2], *result = NULL;
+
+	if (ac != 3 || _isdigit(num1) || _isdigit(num2))
+	{
+		_puts("Error");
+		exit(98);
+	}
+
+	if (av[1][0] == 48 || av[2][0] == 48)
+	{
+		_puts("0");
 		exit(0);
 	}
-	multipliesNumbers(argv);
+
+	while (num1[len1])
+		len1++;
+
+	while (num2[len2])
+		len2++;
+
+	result = multiplication(num1, num2, len1, len2);
+
+	if (result[0] == '0')
+		_puts(result + 1);
+
+	else
+		_puts(result);
+	free(result);
 
 	return (0);
 }
