@@ -4,6 +4,10 @@
 import sys
 
 def makeChange(coins, total):
+
+    if (total <= 0):
+        return 0
+
     size = len(coins)
     return minCoins(coins, size, total)
 
