@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""A Dynamic Programming based Python3 program to
+    find minimum of coins to make a given change total"""
 import sys
 
 def makeChange(coins, total):
