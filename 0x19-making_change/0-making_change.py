@@ -10,10 +10,6 @@ def makeChange(coins, total):
         return 0
 
     size = len(coins)
-    return minCoins(coins, size, total)
-
-
-def minCoins(coins, size, total):
 
     table = [0 for i in range(total + 1)]
 
