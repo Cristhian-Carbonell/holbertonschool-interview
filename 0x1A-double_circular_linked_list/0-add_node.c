@@ -16,10 +16,10 @@ List *add_node_end(List **list, char *str)
 		return (NULL);
 	if (!*list)
 	{
-		*list = createNode(&(*list), str);
-		return (*list);
+		tmp = createNode(&(*list), str);
+		return (tmp);
 	}
-	head->str = str;
+	head->str = strdup(str);
 	head->next = *list;
 	if ((*list)->next == NULL && (*list)->prev == NULL)
 	{
@@ -45,7 +45,7 @@ List *add_node_end(List **list, char *str)
 		}
 	}
 
-	return (*list);
+	return (head);
 }
 
 
@@ -66,10 +66,10 @@ List *add_node_begin(List **list, char *str)
 		return (NULL);
 	if (!*list)
 	{
-		*list = createNode(&(*list), str);
-		return (*list);
+		tmp = createNode(&(*list), str);
+		return (tmp);
 	}
-	head->str = str;
+	head->str = strdup(str);
 	head->next = *list;
 	if (tmp->next == NULL && tmp->prev == NULL)
 	{
@@ -88,7 +88,7 @@ List *add_node_begin(List **list, char *str)
 		*list = head;
 	}
 
-	return (*list);
+	return (head);
 }
 
 /**
@@ -105,11 +105,11 @@ List *createNode(List **list, char *str)
 	if (!head)
 		return (NULL);
 
-	head->str = str;
-	head->next = NULL;
-	head->prev = NULL;
+	head->str = strdup(str);
+	head->next = head;
+	head->prev = head;
 	*list = head;
 
-	return (*list);
+	return (head);
 }
 
