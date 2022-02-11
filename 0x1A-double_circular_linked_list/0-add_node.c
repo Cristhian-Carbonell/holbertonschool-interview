@@ -10,23 +10,40 @@
 List *add_node_end(List **list, char *str)
 {
 	List *head = malloc(sizeof(List));
+	List *tmp = *list;
 
 	if (!head)
 		return (NULL);
-	head->str = _strdup(str);
 	if (!*list)
 	{
-		head->next = head;
-		head->prev = head;
-		*list = head;
-
-		return (head);
+		tmp = createNode(list, str);
+		return (tmp);
 	}
-
+	head->str = _strdup(str);
 	head->next = *list;
-	head->prev = (*list)->prev;
-	(*list)->prev = head;
-	head->prev->next = head;
+	if ((*list)->next == NULL && (*list)->prev == NULL)
+	{
+		(*list)->next = head;
+		(*list)->prev = head;
+		head->prev = *list;
+	} else
+	{
+		(*list)->prev = head;
+		tmp = (*list)->next;
+		if (tmp->next == NULL && tmp->prev == NULL)
+		{
+			tmp->prev = *list;
+			tmp->next = head;
+			head->prev = tmp;
+		} else
+		{
+			while (tmp->next != *list)
+				tmp = tmp->next;
+			tmp->prev = tmp->prev;
+			tmp->next = head;
+			head->prev = tmp;
+		}
+	}
 
 	return (head);
 }
@@ -42,11 +59,55 @@ List *add_node_end(List **list, char *str)
  */
 List *add_node_begin(List **list, char *str)
 {
-	List *head = add_node_end(list, str);
+	List *head = malloc(sizeof(List));
+	List *tmp = *list;
+
+	if (!head)
+		return (NULL);
+	if (!*list)
+	{
+		tmp = createNode(list, str);
+		return (tmp);
+	}
+	head->str = _strdup(str);
+	head->next = *list;
+	if (tmp->next == NULL && tmp->prev == NULL)
+	{
+		tmp->next = head;
+		tmp->prev = head;
+		head->prev = tmp;
+		*list = head;
+	} else
+	{
+		tmp->prev = head;
+		while (tmp->next != *list)
+			tmp = tmp->next;
+		tmp->next = head;
+		tmp->prev = tmp->prev;
+		head->prev = tmp;
+		*list = head;
+	}
+
+	return (head);
+}
+
+/**
+ * createNode - create a new node
+ * @list: list to modify
+ * @str: string to copy into the new node
+ *
+ * Return: Address of the new node
+ */
+List *createNode(List **list, char *str)
+{
+	List *head = malloc(sizeof(List));
 
 	if (!head)
 		return (NULL);
 
+	head->str = _strdup(str);
+	head->next = head;
+	head->prev = head;
 	*list = head;
 
 	return (head);
