@@ -14,12 +14,16 @@ List *add_node_end(List **list, char *str)
 
 	if (!head)
 		return (NULL);
+	head->str = strdup(str);
 	if (!*list)
 	{
-		tmp = createNode(&(*list), str);
-		return (tmp);
+		head->next = head;
+		head->prev = head;
+		*list = head;
+
+		return (head);
 	}
-	head->str = strdup(str);
+
 	head->next = *list;
 	head->prev = (*list)->prev;
 	(*list)->prev = head;
@@ -48,26 +52,3 @@ List *add_node_begin(List **list, char *str)
 
 	return (head);
 }
-
-/**
- * createNode - create a new node
- * @list: list to modify
- * @str: string to copy into the new node
- *
- * Return: Address of the new node
- */
-List *createNode(List **list, char *str)
-{
-	List *head = malloc(sizeof(List));
-
-	if (!head)
-		return (NULL);
-
-	head->str = strdup(str);
-	head->next = head;
-	head->prev = head;
-	*list = head;
-
-	return (head);
-}
-
