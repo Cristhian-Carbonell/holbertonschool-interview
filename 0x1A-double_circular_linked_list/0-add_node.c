@@ -10,7 +10,6 @@
 List *add_node_end(List **list, char *str)
 {
 	List *head = malloc(sizeof(List));
-	List *tmp = *list;
 
 	if (!head)
 		return (NULL);
