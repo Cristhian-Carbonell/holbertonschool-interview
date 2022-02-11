@@ -21,29 +21,9 @@ List *add_node_end(List **list, char *str)
 	}
 	head->str = strdup(str);
 	head->next = *list;
-	if ((*list)->next == NULL && (*list)->prev == NULL)
-	{
-		(*list)->next = head;
-		(*list)->prev = head;
-		head->prev = *list;
-	} else
-	{
-		(*list)->prev = head;
-		tmp = (*list)->next;
-		if (tmp->next == NULL && tmp->prev == NULL)
-		{
-			tmp->prev = *list;
-			tmp->next = head;
-			head->prev = tmp;
-		} else
-		{
-			while (tmp->next != *list)
-				tmp = tmp->next;
-			tmp->prev = tmp->prev;
-			tmp->next = head;
-			head->prev = tmp;
-		}
-	}
+	head->prev = (*list)->prev;
+	(*list)->prev = head;
+	head->prev->next = head;
 
 	return (head);
 }
@@ -59,34 +39,12 @@ List *add_node_end(List **list, char *str)
  */
 List *add_node_begin(List **list, char *str)
 {
-	List *head = malloc(sizeof(List));
-	List *tmp = *list;
+	List *head = add_node_end(list, str);
 
 	if (!head)
 		return (NULL);
-	if (!*list)
-	{
-		tmp = createNode(&(*list), str);
-		return (tmp);
-	}
-	head->str = strdup(str);
-	head->next = *list;
-	if (tmp->next == NULL && tmp->prev == NULL)
-	{
-		tmp->next = head;
-		tmp->prev = head;
-		head->prev = tmp;
-		*list = head;
-	} else
-	{
-		tmp->prev = head;
-		while (tmp->next != *list)
-			tmp = tmp->next;
-		tmp->next = head;
-		tmp->prev = tmp->prev;
-		head->prev = tmp;
-		*list = head;
-	}
+
+	*list = head;
 
 	return (head);
 }
