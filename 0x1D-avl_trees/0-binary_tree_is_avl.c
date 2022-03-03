@@ -11,14 +11,14 @@
  */
 int isBSTUtil(const binary_tree_t *node, int min, int max)
 {
-    if (!node)
-        return (0);
+	if (!node)
+		return (1);
 
-    if (node->n < min || node->n > max)
-        return (0);
+	if (node->n < min || node->n > max)
+		return (0);
 
-    return (isBSTUtil(node->left, min, node->n - 1) &&
-            isBSTUtil(node->right, node->n + 1, max));
+	return (isBSTUtil(node->left, min, node->n - 1) &&
+		isBSTUtil(node->right, node->n + 1, max));
 }
 
 /**
@@ -30,7 +30,7 @@ int isBSTUtil(const binary_tree_t *node, int min, int max)
  */
 int max(int a, int b)
 {
-    return ((a >= b) ? a : b);
+	return ((a >= b) ? a : b);
 }
 
 /**
@@ -42,14 +42,15 @@ int max(int a, int b)
  */
 int height(binary_tree_t *tree)
 {
-        if (!tree)
-            return (0);
+	if (!tree)
+		return (0);
 
-        return (1 + max(height(tree->left), height(tree->right)));
+	return (1 + max(height(tree->left), height(tree->right)));
 }
 
 /**
- * binary_tree_is_avl - function that checks if a binary tree is a valid AVL Tree
+ * binary_tree_is_avl - function that checks if a binary tree
+ * is a valid AVL Tree
  * @tree: is a pointer to the root node of the tree to check
  *
  * Return: 1 if tree is a valid AVL Tree, and 0 otherwise or
@@ -57,24 +58,22 @@ int height(binary_tree_t *tree)
  */
 int binary_tree_is_avl(const binary_tree_t *tree)
 {
-    int lh, rh;
+	int lh, rh;
 
-    if(!tree)
-        return (0);
-    printf("%d\n", tree->n);
+	if (!tree)
+		return (1);
 
-    lh = height(tree->left);
-    rh = height(tree->right);
-    printf("lh = %d, rh = %d\n", lh, rh)
-;    if (abs(lh - rh) <= 1 && binary_tree_is_avl(tree->left) && binary_tree_is_avl(tree->right))
-    {
-        printf("ingresa\n");
-        if (isBSTUtil(tree, INT_MIN, INT_MAX))
-            return (0);
-        return (1);
-    }
+	lh = height(tree->left);
+	rh = height(tree->right);
 
-    return (0);
+	if (abs(lh - rh) <= 1 && binary_tree_is_avl(tree->left) &&
+		binary_tree_is_avl(tree->right))
+	{
+		if (isBSTUtil(tree, INT_MIN, INT_MAX))
+			return (1);
+	}
+
+	return (0);
 }
 
 /**
@@ -86,17 +85,17 @@ int binary_tree_is_avl(const binary_tree_t *tree)
  */
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
 {
-        binary_tree_t *tempNode = NULL;
+	binary_tree_t *tempNode = NULL;
 
-        tempNode = malloc(sizeof(binary_tree_t));
+	tempNode = malloc(sizeof(binary_tree_t));
 
-        if(!tempNode)
-            return (0);
+	if (!tempNode)
+		return (0);
 
-        tempNode->parent = parent;
-        tempNode->n = value;
-        tempNode->left = NULL;
-        tempNode->right = NULL;
+	tempNode->parent = parent;
+	tempNode->n = value;
+	tempNode->left = NULL;
+	tempNode->right = NULL;
 
-        return(tempNode);
+	return (tempNode);
 }
