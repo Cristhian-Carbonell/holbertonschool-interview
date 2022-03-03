@@ -82,27 +82,3 @@ int binary_tree_is_avl(const binary_tree_t *tree)
 
 	return (isAVL(tree));
 }
-
-/**
- * binary_tree_node - creates a binary tree node
- * @parent: is a pointes to the parent node of the node to create
- * @value: is the value to put int the new node
- *
- * Return: a pointer to the new node, or NULL on failure
- */
-binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
-{
-	binary_tree_t *tempNode = NULL;
-
-	tempNode = malloc(sizeof(binary_tree_t));
-
-	if (!tempNode)
-		return (0);
-
-	tempNode->parent = parent;
-	tempNode->n = value;
-	tempNode->left = NULL;
-	tempNode->right = NULL;
-
-	return (tempNode);
-}
