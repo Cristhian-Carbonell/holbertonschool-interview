@@ -65,8 +65,8 @@ int binary_tree_is_avl(const binary_tree_t *tree)
 
     lh = height(tree->left);
     rh = height(tree->right);
-
-    if (abs(lh - rh) <= 1 && binary_tree_is_avl(tree->left) && binary_tree_is_avl(tree->right))
+    printf("lh = %d, rh = %d\n", lh, rh)
+;    if (abs(lh - rh) <= 1 && binary_tree_is_avl(tree->left) && binary_tree_is_avl(tree->right))
     {
         printf("ingresa\n");
         if (isBSTUtil(tree, INT_MIN, INT_MAX))
