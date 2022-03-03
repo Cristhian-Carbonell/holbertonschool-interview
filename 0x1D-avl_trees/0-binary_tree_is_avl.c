@@ -1,6 +1,27 @@
 #include "binary_trees.h"
 
 /**
+ * isBSTUtil - checking is it is a BTS
+ * @node: is a pointer to node
+ * @min: minimum number
+ * @max: maximum number
+ *
+ * Return: true if the given tree is BST and
+ * its values are >= min and <= max
+ */
+int isBSTUtil(const binary_tree_t *node, int min, int max)
+{
+    if (!node)
+        return (0);
+
+    if (node->n < min || node->n > max)
+        return (0);
+
+    return (isBSTUtil(node->left, min, node->n - 1) &&
+            isBSTUtil(node->right, node->n + 1, max));
+}
+
+/**
  * max - returns maximun of two integers
  * @a: one integer
  * @b: two integer
@@ -48,7 +69,7 @@ int binary_tree_is_avl(const binary_tree_t *tree)
     if (abs(lh - rh) <= 1 && binary_tree_is_avl(tree->left) && binary_tree_is_avl(tree->right))
     {
         printf("ingresa\n");
-        if (isBST(tree))
+        if (isBST(tree, INT_MIN, INT_MAX))
             return (0);
         return (1);
     }
