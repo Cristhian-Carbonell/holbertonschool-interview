@@ -28,6 +28,5 @@ typedef struct binary_tree_s avl_t;
 void binary_tree_print(const binary_tree_t *);
 int binary_tree_is_avl(const binary_tree_t *tree);
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
-int isBST(const binary_tree_t *node);
 
 #endif /* BINARY_TREES_H */
