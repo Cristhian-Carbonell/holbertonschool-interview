@@ -45,7 +45,7 @@ int height(binary_tree_t *tree)
 }
 
 /**
- * binary_tree_is_avl - function that checks if a binary tree
+ * isAVL - function that checks if a binary tree
  * is a valid AVL Tree
  * @tree: is a pointer to the root node of the tree to check
  *
