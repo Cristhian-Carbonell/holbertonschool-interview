@@ -7,23 +7,28 @@ def pascal_triangle(n):
     """pascal triangle"""
     if n <= 0:
         return []
-
+    lists = []
     triangle = []
     nodo = 1
-    for fila in range(n):
-        triangle.append(nodo)
-        if fila >= 2:
+    for row in range(n):
+        lists.append([])
+        if row < 2:
+            triangle.append(nodo)
+            lists[row].extend(triangle)
+        else:
             copylist = []
             copylist.insert(0, nodo)
             index = 1
             count = 0
-            while index < fila:
+            while index < row:
                 copylist.insert(index, (triangle[count] + triangle[index]))
                 index += 1
                 count += 1
 
-            copylist.insert(fila, triangle[fila])
+            copylist.insert(row, nodo)
             triangle.clear()
             triangle.extend(copylist)
+            lists[row].extend(triangle)
             copylist.clear()
-    return triangle
+
+    return lists
