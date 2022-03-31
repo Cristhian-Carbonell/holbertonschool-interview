@@ -67,8 +67,7 @@ int regex(char const *str, char const *pattern)
 			return (0);
 		if (str[i] != pattern[j])
 			return (0);
-		// if (str[i + 1] == '\0' && pattern[j + 1] != '\0')
-		//	return (0);
+
 		i++, j++;
 	}
 	return (1);
