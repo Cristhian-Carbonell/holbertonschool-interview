@@ -29,24 +29,10 @@ int alphabet(char const *pattern)
 	return (0);
 }
 
-/**
- * regex_match - function that checks whether a given pattern
- * matches a given string.
- * @str: is the string to scan
- * @pattern: is the regular expression
- *
- * Return: 1 if the pattern matches the string, or 0 if it doesn’t
- */
-int regex_match(char const *str, char const *pattern)
+int regex(char const *str, char const *pattern)
 {
 	int i = 0;
 	int j = 0;
-
-	if (str[i] == '\0')
-		return (0);
-
-	if (str[i] == 'A' && str[strlen(str) - 1] == 'Z')
-		return (alphabet(pattern));
 
 	while (str[i] != '\0')
 	{
@@ -90,5 +76,31 @@ int regex_match(char const *str, char const *pattern)
 		i++, j++;
 	}
 
+	return (1);
+}
+/**
+ * regex_match - function that checks whether a given pattern
+ * matches a given string.
+ * @str: is the string to scan
+ * @pattern: is the regular expression
+ *
+ * Return: 1 if the pattern matches the string, or 0 if it doesn’t
+ */
+int regex_match(char const *str, char const *pattern)
+{
+	int i = 0;
+
+	if (str[i] == '\0')
+	{
+		if (pattern[i] == '\0')
+			return (1);
+		return (0);
+	}
+
+	if (str[i] == 'A' && str[strlen(str) - 1] == 'Z')
+		return (alphabet(pattern));
+
+	if (str[i] != '\0')
+		return (regex(str, pattern));
 	return (1);
 }
