@@ -17,6 +17,8 @@
  */
 int main(void)
 {
+	TEST_MATCH("", "A*");
+	TEST_MATCH("A", "A*");
 	TEST_MATCH("AB", "A*");
 	TEST_MATCH("", "A");
 	TEST_MATCH("A", "AA");

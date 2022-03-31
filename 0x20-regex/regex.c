@@ -94,7 +94,14 @@ int regex_match(char const *str, char const *pattern)
 	{
 		if (pattern[i] == '\0')
 			return (1);
+		else
+			if (pattern[i + 1] == '*')
+				return (1);
 		return (0);
+	} else {
+		if (str[i] == pattern[i] && pattern[i + 1] == '*')
+			if (pattern[i + 2] == '\0')
+				return (1);
 	}
 
 	if (str[i] == 'A' && str[strlen(str) - 1] == 'Z')
