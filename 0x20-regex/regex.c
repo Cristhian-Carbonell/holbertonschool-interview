@@ -1,6 +1,35 @@
 #include "regex.h"
 
 /**
+ *
+ */
+int checkPoint(char const *pattern)
+{
+	int index = 0;
+
+	while (pattern[index] != '\0')
+	{
+		if (pattern[index] == '.')
+			return (0);
+		index++;
+	}
+
+	return (1);
+}
+
+/**
+ *
+ */
+int alphabet(char const *pattern)
+{
+	int len = strlen(pattern) - 1;
+
+	if (pattern[len] == '*' || pattern[len] == 'Z')
+		return (1);
+	return (0);
+}
+
+/**
  * regex_match - function that checks whether a given pattern
  * matches a given string.
  * @str: is the string to scan
@@ -10,30 +39,55 @@
  */
 int regex_match(char const *str, char const *pattern)
 {
-	int index = 0;
-	int element = 0;
+	int i = 0;
+	int j = 0;
 
-	while (str[index] != '\0')
+	if (str[i] == '\0')
+		return (0);
+
+	if (str[i] == 'A' && str[strlen(str) - 1] == 'Z')
+		return (alphabet(pattern));
+
+	while (str[i] != '\0')
 	{
-		if (pattern[element] == 'Z' && pattern[element++] == '*')
+		if (pattern[j] == 'Z' && pattern[j + 1] == '*')
 		{
-			element += 2;
+			j += 2;
 			continue;
 		}
-		if (pattern[element] == '*' || pattern[element] == '.')
+		if (pattern[j] == '*' || pattern[j] == '.')
 		{
-			if (pattern[element] == '.')
-				element++;
-			index++;
+			if (checkPoint(pattern))
+				if (str[i] != pattern[j - 1] && pattern[j - 1] != '.')
+					return (0);
+			if (pattern[j + 1] == 'o')
+			{
+				j++;
+				if (pattern[j + 1] == '.')
+				{
+					j++;
+					if (pattern[j + 1] == '\0')
+						return (1);
+				}
+				else if (pattern[j + 1] == '\0')
+					return (0);
+				j--;
+			}
+			if (pattern[j] == '.')
+				j++;
+			i++;
 			continue;
 		}
 
-		if (str[index] == '.' || str[index] == '*')
+		if (str[i] == '.' || str[i] == '*')
 			return (0);
 
-		if (str[index] != pattern[element])
+		if (str[i] != pattern[j])
 			return (0);
-		index++, element++;
+
+		if (str[i + 1] == '\0' && pattern[j + 1] != '\0')
+			return (0);
+		i++, j++;
 	}
 
 	return (1);

@@ -17,6 +17,11 @@
  */
 int main(void)
 {
+	TEST_MATCH("AB", "A*");
+	TEST_MATCH("", "A");
+	TEST_MATCH("A", "AA");
+	TEST_MATCH("AZ", "AB*C*D*E*F*G*H*I*J*K*L*M*N*O*P*Q*R*S*T*U*V*W*X*Y*Z");
+	TEST_MATCH("AFJLOSWZ", "AB*C*D*E*F*G*H*I*J*K*L*M*N*O*P*Q*R*S*T*U*V*W*X*Y*Z*");
 	TEST_MATCH("H", "H");
 	TEST_MATCH("HH", "H");
 	TEST_MATCH("HH", "H*");
