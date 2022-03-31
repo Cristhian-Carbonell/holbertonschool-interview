@@ -1,7 +1,10 @@
 #include "regex.h"
 
 /**
+ * checkPoint - check point
+ * @pattern: is the regular expression
  *
+ * Return: 1 or 0
  */
 int checkPoint(char const *pattern)
 {
@@ -18,7 +21,10 @@ int checkPoint(char const *pattern)
 }
 
 /**
+ * alphabet - check alphabet
+ * @pattern: is the regular expression
  *
+ * Return: 1 or 0
  */
 int alphabet(char const *pattern)
 {
@@ -29,6 +35,14 @@ int alphabet(char const *pattern)
 	return (0);
 }
 
+/**
+ * regex_match - function that checks whether a given pattern
+ * matches a given string.
+ * @str: is the string to scan
+ * @pattern: is the regular expression
+ *
+ * Return: 1 if the pattern matches the string, or 0 if it doesn’t
+ */
 int regex(char const *str, char const *pattern)
 {
 	int i = 0, j = 0;
@@ -104,9 +118,10 @@ int regex_match(char const *str, char const *pattern)
 				if (pattern[i + 2] == '\0')
 					return (1);
 	}
-	
-	if (str[i] == 'A' && str[strlen(str) - 1] == 'Z')
-		return (alphabet(pattern));
+
+	if ((strlen(str) - 1) < 1)
+		if (str[i] == 'A' && str[strlen(str) - 1] == 'Z')
+			return (alphabet(pattern));
 	if (str[i] == pattern[i])
 		if (str[i + 1] == '\0' && pattern[i + 1] == '\0')
 			return (1);
