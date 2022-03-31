@@ -31,8 +31,7 @@ int alphabet(char const *pattern)
 
 int regex(char const *str, char const *pattern)
 {
-	int i = 0;
-	int j = 0;
+	int i = 0, j = 0;
 
 	while (str[i] != '\0')
 	{
@@ -64,18 +63,14 @@ int regex(char const *str, char const *pattern)
 			i++;
 			continue;
 		}
-
 		if (str[i] == '.' || str[i] == '*')
 			return (0);
-
 		if (str[i] != pattern[j])
 			return (0);
-
-		if (str[i + 1] == '\0' && pattern[j + 1] != '\0')
-			return (0);
+		// if (str[i + 1] == '\0' && pattern[j + 1] != '\0')
+		//	return (0);
 		i++, j++;
 	}
-
 	return (1);
 }
 /**
@@ -93,13 +88,20 @@ int regex_match(char const *str, char const *pattern)
 	if (str[i] == '\0')
 	{
 		if (pattern[i] == '\0')
+		{
 			return (1);
+		}
 		else
+		{
 			if (pattern[i + 1] == '*')
 				return (1);
+		}
 		return (0);
-	} else {
-		if (str[i] == pattern[i] && pattern[i + 1] == '*')
+	}
+	else
+	{
+		if (str[i] == pattern[i])
+			if ( str[i + 1] == '\0' && pattern[i + 1] == '*')
 			if (pattern[i + 2] == '\0')
 				return (1);
 	}
