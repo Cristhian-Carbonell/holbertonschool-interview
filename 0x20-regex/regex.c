@@ -1,91 +1,6 @@
 #include "regex.h"
 
 /**
- * checkPoint - check point
- * @pattern: is the regular expression
- *
- * Return: 1 or 0
- */
-int checkPoint(char const *pattern)
-{
-	int index = 0;
-
-	while (pattern[index] != '\0')
-	{
-		if (pattern[index] == '.')
-			return (0);
-		index++;
-	}
-
-	return (1);
-}
-
-/**
- * alphabet - check alphabet
- * @pattern: is the regular expression
- *
- * Return: 1 or 0
- */
-int alphabet(char const *pattern)
-{
-	int len = strlen(pattern) - 1;
-
-	if (pattern[len] == '*' || pattern[len] == 'Z')
-		return (1);
-	return (0);
-}
-
-/**
- * regex - function that checks whether a given pattern
- * matches a given string.
- * @str: is the string to scan
- * @pattern: is the regular expression
- *
- * Return: 1 if the pattern matches the string, or 0 if it doesn’t
- */
-int regex(char const *str, char const *pattern)
-{
-	int i = 0, j = 0;
-
-	while (str[i] != '\0')
-	{
-		if (pattern[j] == 'Z' && pattern[j + 1] == '*')
-		{
-			j += 2;
-			continue;
-		}
-		if (pattern[j] == '*' || pattern[j] == '.')
-		{
-			if (checkPoint(pattern))
-				if (str[i] != pattern[j - 1] && pattern[j - 1] != '.')
-					return (0);
-			if (pattern[j + 1] == 'o')
-			{
-				j++;
-				if (pattern[j + 1] == '.')
-				{
-					j++;
-					if (pattern[j + 1] == '\0')
-						return (1);
-				}
-				else if (pattern[j + 1] == '\0')
-					return (0);
-				j--;
-			}
-			if (pattern[j] == '.')
-				j++;
-			i++;
-			continue;
-		}
-		if (str[i] == '.' || str[i] == '*')
-			return (0);
-		if (str[i] != pattern[j])
-			return (0);
-		i++, j++;
-	}
-	return (1);
-}
-/**
  * regex_match - function that checks whether a given pattern
  * matches a given string.
  * @str: is the string to scan
@@ -95,43 +10,17 @@ int regex(char const *str, char const *pattern)
  */
 int regex_match(char const *str, char const *pattern)
 {
-	int i = 0;
-	int len = strlen(pattern) - 1;
+	int tmp = 0;
 
-	if (str[i] == '\0')
+	if (*str == '\0' && *pattern == '\0')
+		return (1);
+	if ((*str == *pattern || *pattern == '.') && *(pattern + 1) != '*')
+		return (regex_match(str + 1, pattern + 1));
+	if (*(pattern + 1) == '*')
 	{
-		if (pattern[i] == '\0')
-		{
-			return (1);
-		}
-		else
-		{
-			if (pattern[i + 1] == '*')
-				return (1);
-		}
-		return (0);
+		if (*str != '\0' && (*str == *pattern || *pattern == '.'))
+			tmp = regex_match(str + 1, pattern);
+		return (regex_match(str, pattern + 2) || tmp);
 	}
-	else
-	{
-		if (str[i] == pattern[i])
-			if (str[i + 1] == '\0' && pattern[i + 1] == '*')
-				if (pattern[i + 2] == '\0')
-					return (1);
-	}
-
-	if ((strlen(str) - 1) < 2)
-		if (str[i] == 'A' && str[strlen(str) - 1] == 'Z')
-			return (alphabet(pattern));
-	if (str[i] == 'A' && str[strlen(str) - 1] == 'Z')
-			return (alphabet(pattern));
-
-	if (str[i] == pattern[i])
-		if (str[i + 1] == '\0' && pattern[i + 1] == '\0')
-			return (1);
-
-	if (str[i + 1] == '\0' && pattern[len] != '*')
-		return (0);
-	if (str[i] != '\0')
-		return (regex(str, pattern));
-	return (1);
+	return (0);
 }
