@@ -67,7 +67,7 @@ int regex(char const *str, char const *pattern)
 			return (0);
 		if (str[i] != pattern[j])
 			return (0);
-
+		
 		i++, j++;
 	}
 	return (1);
@@ -101,12 +101,15 @@ int regex_match(char const *str, char const *pattern)
 	{
 		if (str[i] == pattern[i])
 			if ( str[i + 1] == '\0' && pattern[i + 1] == '*')
-			if (pattern[i + 2] == '\0')
-				return (1);
+				if (pattern[i + 2] == '\0')
+					return (1);
 	}
 
 	if (str[i] == 'A' && str[strlen(str) - 1] == 'Z')
 		return (alphabet(pattern));
+
+	if (str[i + 1] == '\0' && pattern[i + 1] != '*')
+		return (0);
 
 	if (str[i] != '\0')
 		return (regex(str, pattern));
