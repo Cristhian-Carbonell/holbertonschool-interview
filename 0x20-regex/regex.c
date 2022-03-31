@@ -119,7 +119,7 @@ int regex_match(char const *str, char const *pattern)
 					return (1);
 	}
 
-	if ((strlen(str) - 1) < 1)
+	if ((strlen(str) - 1) < 2)
 		if (str[i] == 'A' && str[strlen(str) - 1] == 'Z')
 			return (alphabet(pattern));
 	if (str[i] == pattern[i])
