@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """Prime Game"""
-import random
 
 
 def isWinner(x, nums):
@@ -22,7 +21,7 @@ def isWinner(x, nums):
                 winner["Ben"] += 1
                 continue
 
-        newList = random.sample(range(1, round + 1), round)
+        newList = [x for x in range(1, round + 1)]
         element = 0
         for j in range(len(newList)):
             if Maria != 0:
