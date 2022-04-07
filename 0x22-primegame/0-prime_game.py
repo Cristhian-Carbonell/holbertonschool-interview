@@ -8,6 +8,8 @@ def isWinner(x, nums):
     they take turns choosing a prime number from the set and removing that
     number and its multiples from the set. The player that cannot make a move
     loses the game."""
+    if not nums or x < 1:
+        return None
     Maria = 1
     Ben = 0
     winner = {"Maria": 0, "Ben": 0}
