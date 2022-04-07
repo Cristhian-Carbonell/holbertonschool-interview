@@ -10,65 +10,30 @@ def isWinner(x, nums):
     loses the game."""
     if not nums or x < 1:
         return None
-    Maria = 1
-    Ben = 0
-    winner = {"Maria": 0, "Ben": 0}
-    for i in range(x):
-        round = nums[i]
-        if round == 1:
-            if Maria != 0:
-                winner["Maria"] += 1
-                continue
-            else:
-                winner["Ben"] += 1
-                continue
+    n = max(nums)
+    sieve = [True for _ in range(max(n + 1, 2))]
+    for i in range(2, int(pow(n, 0.5)) + 1):
+        if not sieve[i]:
+            continue
+        for j in range(i*i, n + 1, i):
+            sieve[j] = False
 
-        newList = [x for x in range(1, round + 1)]
-        element = 0
-        for j in range(len(newList)):
-            if Maria != 0:
-                if len(newList) == 1:
-                    winner["Maria"] += 1
-                    Maria = 0
-                    Ben = 1
-                    break
-                picks = newList[element]
+    sieve[0] = sieve[1] = False
+    c = 0
+    for i in range(len(sieve)):
+        if sieve[i]:
+            c += 1
+        sieve[i] = c
 
-                if picks == 1:
-                    element += 1
-                    picks = newList[element]
-                index = 0
-                for multiples in range(len(newList)):
-                    if (len(newList) != 1 and (newList[index] % picks) == 0):
-                        newList.pop(index)
-                        index -= 1
-                        element -= 1
-                    index += 1
-                Ben = 1
-                Maria = 0
-                element += 1
-            else:
-                if len(newList) == 1:
-                    winner["Ben"] += 1
-                    Ben = 0
-                    Maria = 1
-                    break
-                picks = newList[element]
+    winner = ""
+    player1 = 0
+    for n in nums:
+        player1 += sieve[n] % 2 == 1
+    if player1 * 2 == len(nums):
+        return None
+    if player1 * 2 > len(nums):
+        winner = "Maria"
+    else:
+        winner = "Ben"
 
-                if picks == 1:
-                    element += 1
-                    picks = newList[element]
-                index = 0
-                for multiples in range(len(newList)):
-                    if (len(newList) != 1 and (newList[index] % picks) == 0):
-                        newList.pop(index)
-                        index -= 1
-                        element -= 1
-                    index += 1
-                Maria = 1
-                Ben = 0
-                element += 1
-    if winner["Maria"] > winner["Ben"]:
-        return "Maria"
-    elif winner["Ben"] > winner["Maria"]:
-        return "Ben"
+    return winner
